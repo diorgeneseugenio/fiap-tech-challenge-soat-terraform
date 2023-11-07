@@ -13,7 +13,21 @@ output "region" {
   value       = var.region
 }
 
-output "cluster_name" {
-  description = "Kubernetes Cluster Name"
-  value       = module.eks.cluster_name
+output "db_name" {
+  description = "MySQL Database name"
+  value       = var.db_name
+}
+output "db_username" {
+  description = "MySQL Database username"
+  value       = var.db_username
+}
+
+output "db_password" {
+  description = "MySQL Database password"
+  value       = var.db_password
+}
+
+output "db_instance_address" {
+  description = "Database URL"
+  value       = module.rds.db_instance_address
 }

@@ -50,3 +50,15 @@ variable "min_size" {
 variable "capacity_type" {
   default = "ON_DEMAND"
 }
+
+variable "db_name" {
+  default = "fiaptechdb"
+}
+
+variable "db_username" {
+  default = "fiaptechuser"
+}
+
+variable "db_password" {
+  default = "teste1234342teste!"
+}
