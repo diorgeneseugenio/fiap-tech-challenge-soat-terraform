@@ -5,14 +5,14 @@ module "rds" {
 
   engine            = "mysql"
   engine_version    = "5.7"
-  instance_class    = "db.t3a.large"
+  instance_class    = "db.t3.micro"
   allocated_storage = 5
 
   db_name  = "demodb"
   username = "user"
   port     = "3306"
 
-  vpc_security_group_ids = [module.security_group.this_security_group_id]
+  vpc_security_group_ids = [module.security_group.security_group_id]
 
   # DB subnet group
   create_db_subnet_group = true

@@ -2,7 +2,7 @@ module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"
 
-  name        = local.name
+  name        = "${local.name}-security-group"
   description = "Security group for ${local.name}"
   vpc_id      = module.vpc.vpc_id
 
