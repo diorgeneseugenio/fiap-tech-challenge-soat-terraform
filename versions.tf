@@ -2,11 +2,11 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 4.1"
+      version = "~> 5.7.0"
     }
   }
 
-  required_version = "1.6.1"
+  required_version = "~> 1.3"
 
   backend "s3" {
     bucket         = "fiap-soat-tech-challenge-tf-state"
