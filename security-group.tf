@@ -1,9 +1,9 @@
-module "security_group" {
+module "security_group_db" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"
 
-  name        = "${local.name}-security-group"
-  description = "Security group for ${local.name}"
+  name        = "${local.name}-security-group-db"
+  description = "Security group for ${local.name} Database"
   vpc_id      = module.vpc.vpc_id
 
   # ingress
@@ -13,7 +13,7 @@ module "security_group" {
       to_port     = 3306
       protocol    = "tcp"
       description = "MySQL access from within VPC"
-      cidr_blocks = module.vpc.vpc_cidr_block
+      cidr_blocks = "0.0.0.0/0"
     },
   ]
 
