@@ -29,7 +29,15 @@ module "eks" {
 }
 
 module "rds" {
-  source = "./modules/rds"
+  source          = "./modules/rds"
+
+  db_name = var.db_name
+  db_username = var.db_username
+  db_password = var.db_password
+  security_group_id = module.network.security_group_id
+  vpc_id          = module.network.vpc_id
+  intra_subnets   = module.network.intra_subnets
+  private_subnets = module.network.private_subnets
 }
 
 module "cognito" {

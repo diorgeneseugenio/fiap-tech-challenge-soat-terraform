@@ -6,14 +6,14 @@ terraform {
     }
   }
 
-  required_version = "1.6.1"
+  required_version = "1.6.3"
 
   backend "s3" {
-    bucket         = "fiap-soat-tech-challenge-tf-state"
+    bucket         = "test-terraform-fiap-tech"
     key            = "fiap-soat-tech-challenge/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "fiap-soat-tech-challenge-tf-state-lock"
+    dynamodb_table = "test-terraform-fiap-tech-lock"
   }
 }
 
