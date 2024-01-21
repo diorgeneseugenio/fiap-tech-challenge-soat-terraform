@@ -11,21 +11,26 @@ module "network" {
 
 }
 
-module "eks" {
-  source = "./modules/eks"
+module ecs {
+  source = "./modules/ecs"
 
-  cluster_name       = var.cluster_name
-  kubernetes_version = var.kubernetes_version
-  region             = var.region
-  min_size           = var.max_size
-  max_size           = var.max_size
-  capacity_type      = var.capacity_type
-  desired_size       = var.desired_size
-  instance_types     = var.instance_types
+  aws_region = var.region
+  cluster_name = var.cluster_name
+}
 
-  vpc_id          = module.network.vpc_id
-  intra_subnets   = module.network.intra_subnets
+module "documentdb_cluster" {
+  source = "./modules/documentDB"
+
+  cluster_identifier = var.cluster_identifier
+  master_username    = var.docdb_master_username
+  master_password    = var.docdb_master_password
+  aws_security_group_id = module.network.security_group_id
+  azs                = var.azs
   private_subnets = module.network.private_subnets
+}
+
+module "sqs" {
+  source = "./modules/sqs"
 }
 
 module "rds" {
@@ -40,6 +45,6 @@ module "rds" {
   private_subnets = module.network.private_subnets
 }
 
-module "cognito" {
-  source = "./modules/cognito"
-}
+# module "cognito" {
+#   source = "./modules/cognito"
+# }

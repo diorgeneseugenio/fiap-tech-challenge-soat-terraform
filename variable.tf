@@ -1,7 +1,3 @@
-variable "cluster_name" {
-  default = "fiap-tech-challeng-soat"
-}
-
 variable "region" {
   default     = "us-east-1"
   description = "AWS region"
@@ -52,7 +48,7 @@ variable "capacity_type" {
 }
 
 variable "db_name" {
-  default = "fiaptechdb"
+  default = "fiaptechprodutodb"
 }
 
 variable "db_username" {
@@ -61,4 +57,20 @@ variable "db_username" {
 
 variable "db_password" {
   default = "teste1234342teste!"
+}
+
+variable "cluster_identifier" {
+  default = "my-docdb-cluster"
+}
+
+variable "cluster_name" {
+  default = "fiap-tech-ecs-fargate"
+}
+
+variable "docdb_master_username" {
+  default = "admincustom"
+}
+
+variable "docdb_master_password" {
+  default = "testtest"
 }

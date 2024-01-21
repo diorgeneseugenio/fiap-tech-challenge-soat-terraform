@@ -13,3 +13,6 @@ output "intra_subnets" {
 output "security_group_id" {
   value = module.security_group.security_group_id
 }
+output "vpc_cidr_block" {
+  value = module.vpc.vpc_cidr_block
+}
