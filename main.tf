@@ -1,5 +1,7 @@
 module "shared" {
   source = "./shared"
+
+  region = local.region
 }
 module "produto" {
   source = "./produto"
