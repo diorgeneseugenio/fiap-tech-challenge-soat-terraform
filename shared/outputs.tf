@@ -52,3 +52,10 @@ output "sqs_queue_pedido_pago" {
 output "subnet_group_name" {
   value = aws_db_subnet_group.private.name
 }
+output "db_uri" {
+  value = "mongodb://${aws_docdb_cluster.docdb.master_username}:${aws_docdb_cluster.docdb.master_password}@${aws_docdb_cluster.docdb.reader_endpoint}:27017/"
+}
+
+output "aws_security_group_document_db_sg_id" {
+  value = aws_security_group.document_db_sg.id
+}

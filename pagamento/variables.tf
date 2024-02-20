@@ -75,12 +75,20 @@ variable "sqs_queue_pedido_pago" {
   description = "value of the sqs_queue_pedido_pago output from the sqs module"
 }
 
-variable "endpoint_processa_pagamento" {
-  type        = string
-  description = "URL of the endpoint to process the payment"
-}
+# variable "endpoint_processa_pagamento" {
+#   type        = string
+#   description = "URL of the endpoint to process the payment"
+# }
 
 variable "subnet_group_name" {
   type        = string
   description = "value of the subnet_group_name output from the db module"
+}
+
+variable "db_uri" {
+  type        = string
+}
+
+variable "aws_security_group_document_db_sg_id" {
+  type        = string
 }

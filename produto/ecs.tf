@@ -1,3 +1,6 @@
+locals {
+  split_endpoint = element(split(":", aws_db_instance.db.endpoint), 0)
+}
 resource "aws_ecs_task_definition" "produto" {
   family                   = local.name
   task_role_arn            = var.ecs_task_role_arn
@@ -16,7 +19,8 @@ resource "aws_ecs_task_definition" "produto" {
     environment = [
       { name = "PORT", value = "${tostring(local.port)}" },
       { name = "DB_NAME", value = aws_db_instance.db.db_name },
-      { name = "DB_HOST", value = aws_db_instance.db.endpoint },
+      { name = "DB_HOST", value = local.split_endpoint },
+      { name = "DB_PORT", value = "${tostring(aws_db_instance.db.port)}" },
       { name = "DB_USERNAME", value = aws_db_instance.db.username },
       { name = "DB_PASSWORD", value = "${aws_db_instance.db.username}-password" },
       { name = "NODE_ENV", value = "prod" },

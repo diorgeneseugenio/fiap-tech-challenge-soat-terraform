@@ -11,9 +11,14 @@ resource "aws_apigatewayv2_integration" "api_pagamento_integration" {
   depends_on = [aws_lb.pagamento]
 }
 #4: APIGW Route
-resource "aws_apigatewayv2_route" "default_route" {
+resource "aws_apigatewayv2_route" "pagamento_route" {
   api_id    = var.api_gateway_api_id
   route_key = "ANY /api/${local.name}/{proxy+}"
+  target    = "integrations/${aws_apigatewayv2_integration.api_pagamento_integration.id}"
+}
+resource "aws_apigatewayv2_route" "metodo_pagamento_route" {
+  api_id    = var.api_gateway_api_id
+  route_key = "ANY /api/metodo-pagamento/{proxy+}"
   target    = "integrations/${aws_apigatewayv2_integration.api_pagamento_integration.id}"
 }
 

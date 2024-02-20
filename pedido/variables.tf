@@ -85,3 +85,11 @@ variable "subnet_group_name" {
   type        = string
   description = "value of the subnet_group_name output from the db module"
 }
+
+variable "db_uri" {
+  type        = string
+}
+
+variable "aws_security_group_document_db_sg_id" {
+  type        = string
+}

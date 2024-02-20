@@ -24,7 +24,7 @@ resource "aws_cognito_user_pool_client" "clients_pool_client" {
   user_pool_id = aws_cognito_user_pool.clients_pool.id
 
   explicit_auth_flows = [
-    "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_PASSWORD_AUTH", "USER_PASSWORD_AUTH"
+    "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_PASSWORD_AUTH"
   ]
 }
 
@@ -57,7 +57,7 @@ resource "aws_cognito_user_pool_client" "admin_pool_client" {
   user_pool_id = aws_cognito_user_pool.admin_pool.id
 
   explicit_auth_flows = [
-    "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_PASSWORD_AUTH", "USER_PASSWORD_AUTH"
+    "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_USER_PASSWORD_AUTH"
   ]
 }
 

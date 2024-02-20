@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 1.6.1"
+  required_version = "~> 1.7.3"
 
   required_providers {
     aws = {
@@ -9,11 +9,11 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "api-gateway-tf-state"
+    bucket         = "api-gateway-tf-state2"
     key            = "api-gateway/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "api-gateway-tf-state-lock"
+    dynamodb_table = "test-terraform-fiap-tech-lock"
   }
 
 }

@@ -14,13 +14,12 @@ resource "aws_ecs_task_definition" "pagamento" {
     portMappings = [{ containerPort = local.port, hostPort = local.port }],
 
     environment = [
-      { name = "NODE_ENV", value = "prod" },
+      { name = "NODE_ENV", value = "production" },
       { name = "PORT", value = "${tostring(local.port)}" },
       { name = "AWS_REGION", value = var.region },
       { name = "AWS_ACCESS_KEY", value = var.aws_access_key },
       { name = "AWS_SECRET_KEY", value = var.aws_secret_key },
-      { name = "MONGODB_CONNECTIONSTRING", value = "mongodb+srv://${local.name}:${local.name}-password@${aws_docdb_cluster.docdb.reader_endpoint}/" },
-      { name = "ENDPOINT_PROCESSA_PAGTO", value = var.endpoint_processa_pagamento },
+      { name = "MONGODB_CONNECTIONSTRING", value = var.db_uri },
       { name = "FILA_ENVIO_PAGAMENTO", value = var.sqs_queue_envio_pagamento },
       { name = "URL_FILA_ENVIO_COBRANCA", value = var.sqs_queue_envio_cobranca },
       { name = "URL_FILA_ENVIO_PAGAMENTO", value = var.sqs_queue_envio_pagamento },
@@ -37,8 +36,6 @@ resource "aws_ecs_task_definition" "pagamento" {
       }
     },
   }])
-
-  depends_on = [aws_docdb_cluster.docdb]
 }
 
 resource "aws_ecs_service" "pagamento" {
@@ -62,4 +59,13 @@ resource "aws_ecs_service" "pagamento" {
     container_name   = local.name
     container_port   = local.port
   }
+}
+
+resource "aws_security_group_rule" "allow_ingress" {
+  type              = "ingress"
+  from_port         = 27017
+  to_port           = 27017
+  protocol          = "tcp"
+  security_group_id = var.aws_security_group_document_db_sg_id
+  source_security_group_id = aws_security_group.pagamento.id
 }
