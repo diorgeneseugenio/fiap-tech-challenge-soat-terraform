@@ -53,3 +53,10 @@ resource "aws_ssm_parameter" "admin_identity_id" {
   value     = aws_cognito_identity_pool.admin_identity_pool.id
   overwrite = true
 }
+
+resource "aws_ssm_parameter" "ssm_sqs_notification" {
+  name      = "/fiap-tech/sqs/arn"
+  type      = "String"
+  value     = aws_cognito_identity_pool.sqs_queue_notification_client.id
+  overwrite = true
+}

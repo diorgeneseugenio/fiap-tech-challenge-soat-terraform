@@ -21,3 +21,9 @@ resource "aws_sqs_queue" "sqs_queue_pedido_pago" {
   fifo_queue                  = true
   content_based_deduplication = true
 }
+
+resource "aws_sqs_queue" "sqs_queue_notification_client" {
+  name                        = "notifica_cliente.fifo"
+  fifo_queue                  = true
+  content_based_deduplication = true
+}
