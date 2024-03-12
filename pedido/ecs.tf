@@ -18,13 +18,11 @@ resource "aws_ecs_task_definition" "pedido" {
       { name = "AWS_ACCESS_KEY", value = var.aws_access_key },
       { name = "AWS_REGION", value = var.region },
       { name = "AWS_SECRET_KEY", value = var.aws_secret_key },
-      { name = "DB_HOST", value = aws_docdb_cluster.docdb.endpoint },
-      { name = "DB_NAME", value = aws_docdb_cluster.docdb.cluster_identifier },
-      { name = "DB_PORT", value = tostring(local.db_port) },
+      { name = "DB_URI", value = var.db_uri },
       { name = "FILA_ENVIO_PAGAMENTO", value = var.sqs_queue_envio_pagamento },
       { name = "FILA_PAGAMENTO_DLQ_URL", value = var.sqs_queue_envio_pagamento_dlq },
       { name = "FILA_PAGAMENTO_URL", value = var.sqs_queue_pedido_pago },
-      { name = "NODE_ENV", value = "prod" },
+      { name = "NODE_ENV", value = "production" },
       { name = "PAGAMENTO_MS_URL", value = var.endpoint_ms_pagamento },
       { name = "PRODUTO_MS_URL", value = var.endpoint_ms_produto }
     ]
@@ -61,4 +59,14 @@ resource "aws_ecs_service" "pedido" {
     container_name   = local.name
     container_port   = local.port
   }
+}
+
+resource "aws_security_group_rule" "allow_ingress" {
+  type              = "ingress"
+  from_port         = 27017
+  to_port           = 27017
+  protocol          = "tcp"
+  security_group_id = var.aws_security_group_document_db_sg_id
+  source_security_group_id = aws_security_group.pedido.id
+
 }

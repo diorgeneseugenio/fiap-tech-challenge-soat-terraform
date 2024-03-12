@@ -64,3 +64,15 @@ resource "aws_db_subnet_group" "private" {
   name       = "private-subnet-group"
   subnet_ids = [aws_subnet.private[0].id, aws_subnet.private[1].id]
 }
+
+resource "aws_security_group" "document_db_sg" {
+  name   = "${local.name}-db-sg"
+  vpc_id = aws_vpc.default.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}

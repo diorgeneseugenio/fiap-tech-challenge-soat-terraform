@@ -11,9 +11,15 @@ resource "aws_apigatewayv2_integration" "api_produto_integration" {
   depends_on = [aws_lb.produto]
 }
 #4: APIGW Route
-resource "aws_apigatewayv2_route" "default_route" {
+resource "aws_apigatewayv2_route" "produto_route" {
   api_id    = var.api_gateway_api_id
   route_key = "ANY /api/${local.name}/{proxy+}"
+  target    = "integrations/${aws_apigatewayv2_integration.api_produto_integration.id}"
+}
+
+resource "aws_apigatewayv2_route" "categoria_route" {
+  api_id    = var.api_gateway_api_id
+  route_key = "ANY /api/categoria/{proxy+}"
   target    = "integrations/${aws_apigatewayv2_integration.api_produto_integration.id}"
 }
 
