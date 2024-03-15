@@ -16,15 +16,20 @@ resource "aws_ecs_task_definition" "pagamento" {
     environment = [
       { name = "NODE_ENV", value = "production" },
       { name = "PORT", value = "${tostring(local.port)}" },
+      { name = "MONGODB_CONNECTIONSTRING", value = var.db_uri },
+      { name = "MONGODB_DB_NAME", value = local.name },
       { name = "AWS_REGION", value = var.region },
       { name = "AWS_ACCESS_KEY", value = var.aws_access_key },
       { name = "AWS_SECRET_KEY", value = var.aws_secret_key },
-      { name = "MONGODB_CONNECTIONSTRING", value = var.db_uri },
-      { name = "FILA_ENVIO_PAGAMENTO", value = var.sqs_queue_envio_pagamento },
+      { name = "FILA_PEDIDO_PAGO", value = var.sqs_queue_pedido_pago },
+      { name = "URL_FILA_PEDIDO_PAGO", value = var.sqs_queue_pedido_pago },
+      { name = "FILA_ENVIO_COBRANCA", value = var.sqs_queue_envio_cobranca },
       { name = "URL_FILA_ENVIO_COBRANCA", value = var.sqs_queue_envio_cobranca },
+      { name = "FILA_ENVIO_PAGAMENTO", value = var.sqs_queue_envio_pagamento },
       { name = "URL_FILA_ENVIO_PAGAMENTO", value = var.sqs_queue_envio_pagamento },
       { name = "URL_FILA_ENVIO_PAGAMENTO_DLQ", value = var.sqs_queue_envio_pagamento_dlq },
-      { name = "URL_FILA_PEDIDO_PAGO", value = var.sqs_queue_pedido_pago },
+      { name = "URL_FILA_CANCELAMENTO_PEDIDO", value = var.sqs_queue_cancelamento },
+      { name = "URL_FILA_ATUALIZA_PEDIDO", value = var.sqs_atualiza_pagamento },
     ]
 
     logConfiguration = {

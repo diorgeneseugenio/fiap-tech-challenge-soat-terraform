@@ -39,6 +39,8 @@ module "pagamento" {
   sqs_queue_envio_pagamento     = module.shared.sqs_queue_envio_pagamento
   sqs_queue_envio_pagamento_dlq = module.shared.sqs_queue_envio_pagamento_dlq
   sqs_queue_pedido_pago         = module.shared.sqs_queue_pedido_pago
+  sqs_atualiza_pagamento        = module.shared.sqs_atualiza_pagamento
+  sqs_queue_cancelamento        = module.shared.sqs_queue_cancelamento
   aws_access_key                = local.aws_access_key
   aws_secret_key                = local.aws_secret_key
   subnet_group_name             = module.shared.subnet_group_name
@@ -62,11 +64,14 @@ module "pedido" {
   region                        = local.region
   aws_access_key                = local.aws_access_key
   aws_secret_key                = local.aws_secret_key
-  endpoint_ms_pagamento         = "" //module.pagamento.lb_url
+  endpoint_ms_pagamento         = module.pagamento.lb_url
   endpoint_ms_produto           = module.produto.lb_url
   sqs_queue_envio_pagamento     = module.shared.sqs_queue_envio_pagamento
   sqs_queue_envio_pagamento_dlq = module.shared.sqs_queue_envio_pagamento_dlq
   sqs_queue_pedido_pago         = module.shared.sqs_queue_pedido_pago
+  sqs_atualiza_pagamento        = module.shared.sqs_atualiza_pagamento
+  sqs_queue_cancelamento        = module.shared.sqs_queue_cancelamento
+  sqs_queue_notificacao         = module.shared.sqs_queue_notificacao
   subnet_group_name             = module.shared.subnet_group_name
 
   depends_on = [module.shared, module.produto, module.pagamento]

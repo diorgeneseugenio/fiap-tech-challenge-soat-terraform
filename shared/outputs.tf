@@ -33,6 +33,14 @@ output "private_subnets_id" {
 
 }
 
+output "sqs_queue_notificacao" {
+  value = aws_sqs_queue.sqs_queue_notificacao.id
+}
+
+output "sqs_queue_cancelamento" {
+  value = aws_sqs_queue.sqs_queue_cancelamento.id
+}
+
 output "sqs_queue_envio_pagamento" {
   value = aws_sqs_queue.sqs_queue_envio_pagamento.id
 }
@@ -47,6 +55,9 @@ output "sqs_queue_envio_pagamento_dlq" {
 
 output "sqs_queue_pedido_pago" {
   value = aws_sqs_queue.sqs_queue_pedido_pago.id
+}
+output "sqs_atualiza_pagamento" {
+  value = aws_sqs_queue.sqs_atualiza_pagamento.id
 }
 
 output "subnet_group_name" {

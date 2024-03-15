@@ -1,29 +1,41 @@
 resource "aws_sqs_queue" "sqs_queue_envio_pagamento" {
-  name                        = "envio-pagamento-queue.fifo"
+  name                        = "pagamento-queue.fifo"
   fifo_queue                  = true
   content_based_deduplication = true
 }
 
-resource "aws_sqs_queue" "sqs_queue_envio_cobranca" {
-  name                        = "envio-cobranca-queue.fifo"
+resource "aws_sqs_queue" "sqs_queue_notificacao" {
+  name                        = "notification-queue.fifo"
   fifo_queue                  = true
   content_based_deduplication = true
 }
 
 resource "aws_sqs_queue" "sqs_queue_envio_pagamento_dlq" {
-  name                        = "envio-pagamento-dlq-queue.fifo"
+  name                        = "pagamento-queue-dlq-queue.fifo"
   fifo_queue                  = true
   content_based_deduplication = true
 }
+resource "aws_sqs_queue" "sqs_queue_envio_cobranca" {
+  name                        = "cobranca-queue.fifo"
+  fifo_queue                  = true
+  content_based_deduplication = true
+}
+
+resource "aws_sqs_queue" "sqs_queue_cancelamento" {
+  name                        = "cancelamento-queue.fifo"
+  fifo_queue                  = true
+  content_based_deduplication = true
+}
+
 
 resource "aws_sqs_queue" "sqs_queue_pedido_pago" {
-  name                        = "pedido-pago-queue.fifo"
+  name                        = "pedido-pago.fifo"
   fifo_queue                  = true
   content_based_deduplication = true
 }
 
-resource "aws_sqs_queue" "sqs_queue_notification_client" {
-  name                        = "notifica_cliente.fifo"
+resource "aws_sqs_queue" "sqs_atualiza_pagamento" {
+  name                        = "atualiza-pagamento.fifo"
   fifo_queue                  = true
   content_based_deduplication = true
 }

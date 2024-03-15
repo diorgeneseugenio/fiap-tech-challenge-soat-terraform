@@ -71,6 +71,20 @@ variable "sqs_queue_pedido_pago" {
   description = "value of the sqs_queue_pedido_pago output from the sqs module"
 }
 
+variable "sqs_atualiza_pagamento" {
+  type        = string
+  description = "value of the sqs_atualiza_pagamento output from the sqs module"
+}
+
+variable "sqs_queue_notificacao" {
+  type        = string
+  description = "value of the sqs_queue_notificacao output from the sqs module"
+}
+variable "sqs_queue_cancelamento" {
+  type        = string
+  description = "value of the sqs_queue_cancelamento output from the sqs module"
+}
+
 variable "endpoint_ms_pagamento" {
   type        = string
   description = "URL of the endpoint to process the payment"
