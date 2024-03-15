@@ -14,17 +14,19 @@ resource "aws_ecs_task_definition" "pedido" {
     portMappings = [{ containerPort = local.port, hostPort = local.port }],
 
     environment = [
+      { name = "NODE_ENV", value = "production" },
+      { name = "DB_URI", value = var.db_uri },
+      { name = "PRODUTO_MS_URL", value = var.endpoint_ms_produto },
+      { name = "PAGAMENTO_MS_URL", value = var.endpoint_ms_pagamento },
+      { name = "FILA_PAGAMENTO_URL", value = var.sqs_queue_pedido_pago },
+      { name = "FILA_PAGAMENTO_DLQ_URL", value = var.sqs_queue_envio_pagamento_dlq },
+      { name = "FILA_ENVIO_PAGAMENTO", value = var.sqs_queue_envio_pagamento },
+      { name = "FILA_NOTIFICACAO", value = var.sqs_queue_notificacao },
+      { name = "FILA_CANCELAMENTO_PAGAMENTO", value = var.sqs_queue_cancelamento },
       { name = "PORT", value = "${tostring(local.port)}" },
       { name = "AWS_ACCESS_KEY", value = var.aws_access_key },
       { name = "AWS_REGION", value = var.region },
       { name = "AWS_SECRET_KEY", value = var.aws_secret_key },
-      { name = "DB_URI", value = var.db_uri },
-      { name = "FILA_ENVIO_PAGAMENTO", value = var.sqs_queue_envio_pagamento },
-      { name = "FILA_PAGAMENTO_DLQ_URL", value = var.sqs_queue_envio_pagamento_dlq },
-      { name = "FILA_PAGAMENTO_URL", value = var.sqs_queue_pedido_pago },
-      { name = "NODE_ENV", value = "production" },
-      { name = "PAGAMENTO_MS_URL", value = var.endpoint_ms_pagamento },
-      { name = "PRODUTO_MS_URL", value = var.endpoint_ms_produto }
     ]
 
     logConfiguration = {

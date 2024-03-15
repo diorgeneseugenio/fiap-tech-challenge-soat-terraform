@@ -92,3 +92,13 @@ variable "db_uri" {
 variable "aws_security_group_document_db_sg_id" {
   type        = string
 }
+
+variable "sqs_atualiza_pagamento" {
+  type        = string
+  description = "value of the sqs_atualiza_pagamento output from the sqs module"
+}
+
+variable "sqs_queue_cancelamento" {
+  type        = string
+  description = "value of the sqs_queue_cancelamento output from the sqs module"
+}
