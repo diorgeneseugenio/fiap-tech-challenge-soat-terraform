@@ -16,9 +16,9 @@ resource "aws_ecs_task_definition" "pedido" {
     environment = [
       { name = "NODE_ENV", value = "production" },
       { name = "DB_URI", value = var.db_uri },
-      { name = "PRODUTO_MS_URL", value = var.endpoint_ms_produto },
-      { name = "PAGAMENTO_MS_URL", value = var.endpoint_ms_pagamento },
-      { name = "FILA_PAGAMENTO_URL", value = var.sqs_queue_pedido_pago },
+      { name = "PRODUTO_MS_URL", value = "http://${var.endpoint_ms_produto}" },
+      { name = "PAGAMENTO_MS_URL", value = "http://${var.endpoint_ms_pagamento}" },
+      { name = "FILA_PAGAMENTO_URL", value = var.sqs_atualiza_pagamento },
       { name = "FILA_PAGAMENTO_DLQ_URL", value = var.sqs_queue_envio_pagamento_dlq },
       { name = "FILA_ENVIO_PAGAMENTO", value = var.sqs_queue_envio_pagamento },
       { name = "FILA_NOTIFICACAO", value = var.sqs_queue_notificacao },

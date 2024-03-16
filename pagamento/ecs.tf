@@ -16,7 +16,7 @@ resource "aws_ecs_task_definition" "pagamento" {
     environment = [
       { name = "NODE_ENV", value = "production" },
       { name = "PORT", value = "${tostring(local.port)}" },
-      { name = "MONGODB_CONNECTIONSTRING", value = var.db_uri },
+      { name = "MONGODB_CONNECTIONSTRING", value = "${var.db_uri}?retryWrites=false" },
       { name = "MONGODB_DB_NAME", value = local.name },
       { name = "AWS_REGION", value = var.region },
       { name = "AWS_ACCESS_KEY", value = var.aws_access_key },
